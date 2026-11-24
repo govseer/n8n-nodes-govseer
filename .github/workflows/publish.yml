@@ -62,6 +62,9 @@ on:
       # Matches 0.1.0, 1.2.3, 2.0.0-rc.1, etc.
       # See "TAG CONVENTION" above if you prefer tags with a "v" prefix.
       - '*.*.*'
+  # Govseer: also run by hand; publishes the version in package.json (tags can't be
+  # pushed from the authoring environment).
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -96,6 +99,11 @@ jobs:
         #   .npmrc here before publishing.
         run: |
           [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
-          npm run release
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            npm run lint && npm run build
+            npm publish --provenance --access public --ignore-scripts
+          else
+            npm run release
+          fi
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
