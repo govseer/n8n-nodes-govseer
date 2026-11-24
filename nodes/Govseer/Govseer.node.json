@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-govseer.govseer",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Data & Storage", "Utility"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/govseer/n8n-nodes-govseer?tab=readme-ov-file#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://govseer.com/docs/api"
+			}
+		]
+	}
+}
