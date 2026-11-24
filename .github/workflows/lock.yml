@@ -1,0 +1,25 @@
+# One-off: writes package-lock.json for the pinned devDependencies and keeps it as an
+# artifact, so the lock can be committed (npm is not reachable from the authoring machine).
+name: Lock
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - run: npm install --package-lock-only --ignore-scripts
+      - run: npm ci && npm run lint && npm run build
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: package-lock
+          path: package-lock.json
