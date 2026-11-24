@@ -1,12 +1,12 @@
 # One-off: writes package-lock.json for the pinned devDependencies and keeps it as an
-# artifact, so the lock can be committed (npm is not reachable from the authoring machine).
+# branch named lock, so it can be taken into main (npm is not reachable from the authoring machine).
 name: Lock
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   lock:
@@ -18,8 +18,12 @@ jobs:
           node-version: 'lts/*'
       - run: npm install --package-lock-only --ignore-scripts
       - run: npm ci && npm run lint && npm run build
-      - uses: actions/upload-artifact@v4
+      - name: Push the lock to the lock branch
         if: always()
-        with:
-          name: package-lock
-          path: package-lock.json
+        run: |
+          git config user.name "Govseer"
+          git config user.email "hello@govseer.com"
+          git checkout -B lock
+          git add -f package-lock.json
+          git commit -m "package-lock.json written in CI"
+          git push -f origin lock

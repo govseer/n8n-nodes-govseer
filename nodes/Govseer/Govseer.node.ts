@@ -126,7 +126,7 @@ export class Govseer implements INodeType {
 						name: 'Get Many',
 						value: 'getAll',
 						description: 'Get dated rule changes ahead, each with its official source',
-						action: 'Get upcoming rule changes',
+						action: 'Get many rule changes',
 					},
 				],
 				default: 'getAll',
@@ -281,7 +281,9 @@ export class Govseer implements INodeType {
 					out.push({ json: { error: (error as Error).message }, pairedItem: { item: i } });
 					continue;
 				}
-				if (error instanceof NodeOperationError) throw error;
+				if (error instanceof NodeOperationError) {
+					throw new NodeOperationError(this.getNode(), error, { itemIndex: i });
+				}
 				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 			}
 		}
