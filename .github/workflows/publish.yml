@@ -86,6 +86,10 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
 
+      # Trusted publishing (OIDC) needs npm 11.5.1 or later.
+      - name: Update npm
+        run: npm install -g npm@11
+
       - name: Install dependencies
         run: npm ci
 

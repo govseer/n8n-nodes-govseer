@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-govseer",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Govseer for n8n: EU CLP label elements, marketplace hazard fields, shipping fields and OSHA HCS / WHMIS checks from a safety data sheet, and dated rule changes ahead.",
 	"license": "MIT",
 	"homepage": "https://govseer.com/docs/api",

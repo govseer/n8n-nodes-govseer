@@ -29,7 +29,7 @@ You need a Govseer API key:
 2. Create an API key and copy it. It is shown once.
 3. In n8n, create a **Govseer API** credential and paste the key.
 
-The free plan includes 25 sheets a month. Plans and limits: [govseer.com/docs/api](https://govseer.com/docs/api).
+A free plan is available. Plans and limits: [govseer.com/docs/api](https://govseer.com/docs/api).
 
 ## Usage
 
@@ -47,4 +47,5 @@ The results are a tool, not legal advice.
 
 ## Version history
 
+- 0.1.1: published through npm trusted publishing; the free plan's limit is no longer repeated here. No change to the node.
 - 0.1.0: first release.
